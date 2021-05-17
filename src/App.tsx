@@ -7,12 +7,12 @@ import FactionsListComponent from "./components/FactionsListComponent"
 import './App.css';
 
 const App: React.FC = () => {
-  return (
-    <Tabs>
-      <Tab title="Factions" child={<FactionsListComponent />}>Factions</Tab>
-      <Tab title="Search" child={<SearchComponent />}>Search</Tab>
-    </Tabs>
-  )
+    return (
+        <Tabs>
+            <Tab title="Factions" child={<FactionsListComponent />}>Factions</Tab>
+            <Tab title="Search" child={<SearchComponent />}>Search</Tab>
+        </Tabs>
+    )
 };
 
 export default App;
