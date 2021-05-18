@@ -50,7 +50,7 @@ export const boundRequestResults = (category: ICategory, searchText: string) => 
         url.searchParams.set('categories', category.value);
         url.searchParams.set('search', searchText);
         dispatch(requestSearchResults());
-        parseResponse(url.toString())
+        return await parseResponse(url.toString())
             .then(data => { return data[category.value] })
             .then(async ids => {
                 await Promise.all(ids.map(async (id: number, index: number, array: IResult[]) => {
@@ -61,8 +61,7 @@ export const boundRequestResults = (category: ICategory, searchText: string) => 
                                 id: id,
                                 name: data.name,
                             }
-                        })
-
+                        });
                 }));
                 return ids;
             })
