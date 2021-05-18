@@ -13,9 +13,7 @@ const TabHeader: React.FC<TabHeaderProps> = ({ header, setSelectedTab, index }) 
     }, [setSelectedTab, index])
 
     return (
-        <li>
-            <button onClick={onClick}>{header}</button>
-        </li>
+        <button type="button" className="btn btn-primary" onClick={onClick}>{header}</button>
     )
 }
 

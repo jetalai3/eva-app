@@ -10,7 +10,7 @@ const Tabs: React.FC<TabsProps> = ({ children }) => {
 
     return (
         <div>
-            <ul>
+            <div className="btn-group" role="group" aria-label="Basic example">
                 {children.map((item, index) => (
                     <TabHeader
                         key={index}
@@ -19,7 +19,7 @@ const Tabs: React.FC<TabsProps> = ({ children }) => {
                         setSelectedTab={setSelectedTab}
                     />
                 ))}
-            </ul>
+            </div>
             {children[selectedTab]}
         </div>
     )

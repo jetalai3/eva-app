@@ -8,10 +8,12 @@ import './App.css';
 
 const App: React.FC = () => {
     return (
-        <Tabs>
-            <Tab title="Factions" child={<FactionsListComponent />}>Factions</Tab>
-            <Tab title="Search" child={<SearchComponent />}>Search</Tab>
-        </Tabs>
+        <div className="App">
+            <Tabs>
+                <Tab title="Factions" child={<FactionsListComponent />}>Factions</Tab>
+                <Tab title="Search" child={<SearchComponent />}>Search</Tab>
+            </Tabs>
+        </div>
     )
 };
 

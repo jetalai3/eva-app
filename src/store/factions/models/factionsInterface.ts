@@ -5,7 +5,7 @@ export interface ICeo {
     race_name: string;
 }
 
-interface ICorporation {
+export interface ICorporation {
     name: string;
     member_count: number;
     ceo_id: number;
