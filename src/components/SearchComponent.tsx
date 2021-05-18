@@ -7,8 +7,9 @@ import { AppState } from '../store/rootStore';
 import { AppActions } from '../store/models/actions';
 
 import SearchHeader from "./SearchHeader";
-import { IResult } from "../store/search/models/searchInterface";
+import { ICategory, IResult } from "../store/search/models/searchInterface";
 import { boundRequestResults } from "../store/search/SearchActions";
+import SearchList from "./SearchList";
 
 interface Props { }
 
@@ -17,7 +18,7 @@ interface LinkStateProps {
 }
 
 interface LinkDispatchProps {
-    boundRequestResults: (category: { title: string, url: string, value: string }, searchText: string) => void;
+    boundRequestResults: (category: ICategory, searchText: string) => void;
 }
 
 type LinkProps = Props & LinkStateProps & LinkDispatchProps;
@@ -38,14 +39,10 @@ const SearchComponent: React.FC<LinkProps> = (props) => {
     return (
         <div>
             <SearchHeader fetchSearchRequest={boundRequestResults} />
-            {searchResults.map(result => <div>
-                <span>
-                    ID: {result.id} |
-                </span>
-                <span>
-                    Name: {result.name}
-                </span>
-            </div>)}
+            {searchResults.length ?
+                <SearchList items={searchResults} /> :
+                <div>По вашему запросу ничего не найдено</div>
+            }
         </div>
     )
 }

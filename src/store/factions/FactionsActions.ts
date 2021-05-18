@@ -14,7 +14,7 @@ import {
     RACE_REQUEST_LINK,
     CORPORATION_REQUEST_LINK,
     CHARACTER_REQUEST_LINK
-} from '../../api';
+} from '../../constants';
 
 import { ICeo, IFaction } from './models/factionsInterface';
 

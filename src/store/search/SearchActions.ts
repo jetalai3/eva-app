@@ -1,14 +1,14 @@
 import { Dispatch } from 'redux';
 
 import { AppActions } from "../models/actions";
-import { IResult } from './models/searchInterface';
+import { ICategory, IResult } from './models/searchInterface';
 
 import {
     FETCH_SEARCH_REQUEST,
     FETCH_SEARCH_SUCCESS,
     FETCH_SEARCH_FAILURE,
 } from './models/actions';
-import { MAIN_URL, SEARCH_REQUEST_LINK } from '../../api';
+import { MAIN_URL, SEARCH_REQUEST_LINK } from '../../constants';
 
 
 const requestSearchResults = (): AppActions => ({
@@ -44,7 +44,7 @@ const parseResponse = async (url: string) => {
     }
 }
 
-export const boundRequestResults = (category: { title: string, url: string, value: string }, searchText: string) => {
+export const boundRequestResults = (category: ICategory, searchText: string) => {
     return async (dispatch: Dispatch<AppActions>) => {
         const url = new URL(SEARCH_REQUEST_LINK);
         url.searchParams.set('categories', category.value);
@@ -53,18 +53,18 @@ export const boundRequestResults = (category: { title: string, url: string, valu
         parseResponse(url.toString())
             .then(data => { return data[category.value] })
             .then(async ids => {
-                    await Promise.all(ids.map(async (id: number, index: number, array: IResult[]) => {
-                        const newUrl = new URL(category.url + id, MAIN_URL)
-                        return await parseResponse(newUrl.toString())
+                await Promise.all(ids.map(async (id: number, index: number, array: IResult[]) => {
+                    const newUrl = new URL(category.url + id, MAIN_URL)
+                    return await parseResponse(newUrl.toString())
                         .then(data => {
                             array[index] = {
                                 id: id,
                                 name: data.name,
                             }
                         })
-                            
-                    }));
-                    return ids;
+
+                }));
+                return ids;
             })
             .then((json) => dispatch(receiveSearchResults(json)))
             .catch((error) => dispatch(invalidateSearchResults(error)));

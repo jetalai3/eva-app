@@ -19,29 +19,24 @@ const FactionCard: React.FC<FactionCardProps> = ({ factionElement }) => {
         setModalOpen(!modalOpen);
     }
 
-    return open ? (
+    return (
         <li>
             <p onClick={handleCardOpen}>Faction name: {factionElement.name}</p>
-            <p>Solar system name: {factionElement.solar_system_name}</p>
-            <p>Description: {factionElement.description}</p>
-            {factionElement.corporation.name ? (<button
-                type='button'
-                className='clickable'
-                onClick={handleModalOpen}
-            >
-                {factionElement.corporation.name}
-            </button>) : null}
-            {modalOpen && (<Modal onClose={handleModalOpen}>
-                <Corporation onClose={handleModalOpen} corporation={factionElement.corporation} />
-            </Modal>)}
-
+            {open ? (
+                <>
+                    <p>Solar system name: {factionElement.solar_system_name}</p>
+                    <p>Description: {factionElement.description}</p>
+                    {factionElement.corporation.name ? (
+                    <button onClick={handleModalOpen}>
+                        {factionElement.corporation.name}
+                    </button>) : null}
+                    {modalOpen && (<Modal onClose={handleModalOpen}>
+                        <Corporation onClose={handleModalOpen} corporation={factionElement.corporation} />
+                    </Modal>)}
+                </>
+            ) : null}
         </li>
-    ) :
-        (<li
-            key={factionElement.name}
-        >
-            <p onClick={handleCardOpen}>Faction name: {factionElement.name}</p>
-        </li>)
+    )
 }
 
 export default FactionCard;
