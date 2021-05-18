@@ -33,7 +33,7 @@ const Corporation: React.FC<CorporationProps> = ({ corporation, setModalOpen }) 
                         </button>
                         <h3>{corporation.ceo?.name}</h3>
                         <p>Race: {corporation.ceo?.race_name}</p>
-                        <p>Birthday: {corporation.ceo?.birthday}</p>
+                        <p>Birthday: {corporation.ceo?.birthday?.toLocaleDateString('en-US')}</p>
                     </div>
                 )}
         </div>

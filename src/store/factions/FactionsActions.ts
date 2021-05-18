@@ -67,7 +67,7 @@ const fetchCorpInfo = async (data: IFaction[]) => {
             if (ceo) {
                 const ceoObject: ICeo = {
                     name: ceo.name,
-                    birthday: ceo.birthday,
+                    birthday: new Date(ceo.birthday),
                     race_id: ceo.race_id,
                     race_name: races.find((el: any) => el.race_id === ceo.race_id).name,
                 };

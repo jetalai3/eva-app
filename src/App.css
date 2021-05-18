@@ -31,7 +31,7 @@ ul {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: cyan;
+    background: #0d6efd;
 }
 
 .content-wrapper > button {
