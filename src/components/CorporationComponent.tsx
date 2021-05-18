@@ -2,19 +2,19 @@ import React, { useState } from 'react'
 import { ICorporation } from '../store/factions/models/factionsInterface';
 
 type CorporationProps = {
-    setModalOpen: any;
+    onClose: () => void;
     corporation: Partial<ICorporation>;
 };
 
-const Corporation: React.FC<CorporationProps> = ({ corporation, setModalOpen }) => {
+const Corporation: React.FC<CorporationProps> = ({ corporation, onClose }) => {
     const [showState, setShowState] = useState<boolean>(false);
 
     return (
-        <div className="content-wrapper" onClick={event => setModalOpen(event)}>
+        <div className="content-wrapper" onClick={event => event.stopPropagation()}>
             <button
                 type='button'
                 className='clickable'
-                onClick={event => setModalOpen(event)}
+                onClick={onClose}
             >
                 Close
             </button>

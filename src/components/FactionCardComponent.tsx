@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IFaction } from '../store/factions/models/factionsInterface';
-import Modal from './ModalComponent';
+import Modal from './Modal';
 import Corporation from './CorporationComponent';
 
 type FactionCardProps = {
@@ -15,8 +15,7 @@ const FactionCard: React.FC<FactionCardProps> = ({ factionElement }) => {
         setOpen(!open);
     }
 
-    const handleModalOpen = (event: React.MouseEvent<HTMLElement>) => {
-        if(!(event.target as any).classList.contains('clickable')) return;
+    const handleModalOpen = () => {
         setModalOpen(!modalOpen);
     }
 
@@ -28,13 +27,14 @@ const FactionCard: React.FC<FactionCardProps> = ({ factionElement }) => {
             {factionElement.corporation.name ? (<button
                 type='button'
                 className='clickable'
-                onClick={(event) => handleModalOpen(event)}
+                onClick={handleModalOpen}
             >
                 {factionElement.corporation.name}
             </button>) : null}
-            <Modal modalOpen={modalOpen} setModalOpen={handleModalOpen}>
-                <Corporation setModalOpen={handleModalOpen} corporation={factionElement.corporation} />
-            </Modal>
+            {modalOpen && (<Modal onClose={handleModalOpen}>
+                <Corporation onClose={handleModalOpen} corporation={factionElement.corporation} />
+            </Modal>)}
+
         </li>
     ) :
         (<li

@@ -1,27 +1,27 @@
-import React, { ReactElement, useState } from "react"
+import React, { useState } from "react"
 import TabHeader from "./TabHeader"
 
 type TabsProps = {
-    children: ReactElement[]
+    items: Array<{ title: string, content: React.FC }>
 }
 
-const Tabs: React.FC<TabsProps> = ({ children }) => {
-    const [selectedTab, setSelectedTab] = useState(0)
-
+const Tabs: React.FC<TabsProps> = ({ items }) => {
+    const [selectedTab, setSelectedTab] = useState<number>(0)
+    const TabComponent = items[selectedTab].content;
     return (
-        <div>
+        <>
             <div className="btn-group" role="group" aria-label="Basic example">
-                {children.map((item, index) => (
+                {items.map((item, index) => (
                     <TabHeader
                         key={index}
-                        header={item.props.title}
+                        header={item.title}
                         index={index}
                         setSelectedTab={setSelectedTab}
                     />
                 ))}
             </div>
-            {children[selectedTab]}
-        </div>
+            <TabComponent />
+        </>
     )
 }
 
