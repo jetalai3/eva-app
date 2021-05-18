@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import DropDown from './DropDown';
+import DropDown from '../components/DropDown';
 import { SEARCH_OPTIONS } from '../constants';
 import { ICategory } from '../store/search/models/searchInterface';
 
@@ -20,10 +20,10 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ fetchSearchRequest }) => {
     }, [setSearchText]);
 
     return (
-        <div>
+        <div className="search-header">
             <DropDown items={SEARCH_OPTIONS} onChange={event => setSelectedCategory(SEARCH_OPTIONS.find(item => event.target.value === item.value) || SEARCH_OPTIONS[0])} />
-            <input type='text' onChange={onChange} />
-            <button onClick={onSearch}>Search</button>
+            <input className="form-control" type='text' onChange={onChange} />
+            <button className="btn btn-secondary" onClick={onSearch}>Search</button>
         </div>
     )
 };

@@ -11,6 +11,8 @@ import { ICategory, IResult } from "../store/search/models/searchInterface";
 import { boundRequestResults } from "../store/search/SearchActions";
 import SearchList from "./SearchList";
 
+import './Search.css';
+
 interface Props { }
 
 interface LinkStateProps {
@@ -33,11 +35,11 @@ const mapDispatchToProps = (
     boundRequestResults: bindActionCreators(boundRequestResults, dispatch),
 });
 
-const SearchComponent: React.FC<LinkProps> = (props) => {
+const Search: React.FC<LinkProps> = (props) => {
     const { searchResults, boundRequestResults } = props;
 
     return (
-        <div>
+        <div className="search">
             <SearchHeader fetchSearchRequest={boundRequestResults} />
             {searchResults.length ?
                 <SearchList items={searchResults} /> :
@@ -47,4 +49,4 @@ const SearchComponent: React.FC<LinkProps> = (props) => {
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

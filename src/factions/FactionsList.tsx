@@ -9,7 +9,9 @@ import { AppActions } from '../store/models/actions';
 
 import { IFaction } from '../store/factions/models/factionsInterface';
 import { boundRequestFactions } from '../store/factions/FactionsActions';
-import FactionCard from './FactionCardComponent';
+import FactionCard from './FactionCard';
+
+import './Factions.css';
 
 interface Props { }
 

@@ -10,16 +10,14 @@ const Tabs: React.FC<TabsProps> = ({ items }) => {
     const TabComponent = items[selectedTab].content;
     return (
         <>
-            <div className="btn-group" role="group" aria-label="Basic example">
-                {items.map((item, index) => (
-                    <TabHeader
-                        key={index}
-                        header={item.title}
-                        index={index}
-                        setSelectedTab={setSelectedTab}
-                    />
-                ))}
-            </div>
+            {items.map((item, index) => (
+                <TabHeader
+                    key={index}
+                    header={item.title}
+                    index={index}
+                    setSelectedTab={setSelectedTab}
+                />
+            ))}
             <TabComponent />
         </>
     )

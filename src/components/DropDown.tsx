@@ -5,8 +5,8 @@ type DropDownProps = {
 
 const DropDown: React.FC<DropDownProps> = ({ items, onChange }) => {
 
-    return (<select name='select' onChange={onChange}>
-        {items.map(item => <option value={item.value}>{item.title}</option>)}
+    return (<select name='select' className="form-select" onChange={onChange}>
+        {items.map(item => <option key={item.title} value={item.value}>{item.title}</option>)}
     </select>);
 }
 
