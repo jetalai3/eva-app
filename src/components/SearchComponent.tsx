@@ -1,31 +1,53 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+
+import { AppState } from '../store/rootStore';
+import { AppActions } from '../store/models/actions';
+
 import SearchHeader from "./SearchHeader";
-import { SEARCH_REQUEST_LINK, MAIN_URL } from '../api';
+import { IResult } from "../store/search/models/searchInterface";
+import { boundRequestResults } from "../store/search/SearchActions";
 
-const SearchComponent: React.FC = () => {
-    const [data, setData] = useState([]);
-    const fetchSearchRequest = useCallback((category, searchText) => {
-        const url = new URL(SEARCH_REQUEST_LINK);
-        url.searchParams.set('categories', category.value);
-        url.searchParams.set('search', searchText);
-        fetch(url.toString()).then((res) => res.json())
-            .then(data => { return data[category.value] })
-            .then(async ids => {
-                setData(
-                    await Promise.all(ids.map((id: number) => {
-                        const newUrl = new URL(category.url + id, MAIN_URL)
-                        return fetch(newUrl.toString())
-                            .then(res => res.json())
-                    })))
+interface Props { }
 
+interface LinkStateProps {
+    searchResults: IResult[];
+}
 
-            })
-    }, []);
+interface LinkDispatchProps {
+    boundRequestResults: (category: { title: string, url: string, value: string }, searchText: string) => void;
+}
+
+type LinkProps = Props & LinkStateProps & LinkDispatchProps;
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+    searchResults: state.searchReducer.searchResults,
+});
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<AppState, {}, AppActions>
+) => ({
+    boundRequestResults: bindActionCreators(boundRequestResults, dispatch),
+});
+
+const SearchComponent: React.FC<LinkProps> = (props) => {
+    const { searchResults, boundRequestResults } = props;
 
     return (
-        <div><SearchHeader fetchSearchRequest={fetchSearchRequest} />
-            {data.toString()}</div>
+        <div>
+            <SearchHeader fetchSearchRequest={boundRequestResults} />
+            {searchResults.map(result => <div>
+                <span>
+                    ID: {result.id} |
+                </span>
+                <span>
+                    Name: {result.name}
+                </span>
+            </div>)}
+        </div>
     )
 }
 
-export default SearchComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(SearchComponent);
