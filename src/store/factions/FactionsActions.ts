@@ -51,7 +51,7 @@ const parseResponse = async (url: string) => {
     }
 }
 
-const fetchCorpInfo = async (data: IFaction[]) => {
+export const fetchCorpInfo = async (data: IFaction[]) => {
     const races = await parseResponse(RACE_REQUEST_LINK);
     await Promise.all(data.map(async (element: IFaction, index: number, array: IFaction[]) => {
         try {
@@ -82,10 +82,9 @@ const fetchCorpInfo = async (data: IFaction[]) => {
 }
 
 export const boundRequestFactions = () => {
-    return (dispatch: Dispatch<AppActions>) => {
+    return async (dispatch: Dispatch<AppActions>) => {
         dispatch(requestFactions());
-        return fetch(FACTION_REQUEST_LINK)
-            .then((res) => res.json())
+        return await parseResponse(FACTION_REQUEST_LINK)
             .then(async data => {
                 await Promise.all(data.map(async (element: IFaction, index: number, array: IFaction[]) => {
                     return await parseResponse(SYSTEM_REQUEST_LINK + element.solar_system_id)
