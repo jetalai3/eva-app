@@ -1,4 +1,5 @@
 export interface ICeo {
+    id: number;
     name: string;
     birthday: Date;
     race_id: number;
@@ -6,6 +7,7 @@ export interface ICeo {
 }
 
 export interface ICorporation {
+    id: number;
     name: string;
     member_count: number;
     ceo_id: number;

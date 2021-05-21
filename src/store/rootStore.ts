@@ -1,11 +1,11 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension'
-import thunk, { ThunkMiddleware } from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension"
+import thunk, { ThunkMiddleware } from "redux-thunk";
+import { createLogger } from "redux-logger";
 
-import { factionsReducer } from './factions/FactionsReducer';
-import { searchReducer } from './search/SearchReducer';
-import { AppActions } from './models/actions';
+import { factionsReducer } from "./factions/FactionsReducer";
+import { searchReducer } from "./search/SearchReducer";
+import { AppActions } from "./models/actions";
 
 const logger = createLogger();
 

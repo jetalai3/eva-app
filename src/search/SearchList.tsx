@@ -1,8 +1,8 @@
-import { IResult } from "../store/search/models/searchInterface"
+import { IResult } from "../store/search/models/interfaces/IResult";
 
 type SearchListProps = {
     items: IResult[];
-}
+};
 
 const SearchList: React.FC<SearchListProps> = ({ items }) => {
     return (
@@ -21,7 +21,7 @@ const SearchList: React.FC<SearchListProps> = ({ items }) => {
                 </thead>
                 <tbody>
                     {items.map(item =>
-                        <tr>
+                        <tr key={item.id}>
                             <td>
                                 {item.id}
                             </td>
@@ -32,7 +32,7 @@ const SearchList: React.FC<SearchListProps> = ({ items }) => {
                 </tbody>
             </table>
         </>
-    )
-}
+    );
+};
 
 export default SearchList;

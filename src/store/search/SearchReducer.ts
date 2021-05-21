@@ -3,20 +3,20 @@ import {
     FETCH_SEARCH_REQUEST,
     FETCH_SEARCH_SUCCESS,
     FETCH_SEARCH_FAILURE,
-} from './models/actions';
+} from "./models/actions";
 
-import { IResult } from './models/searchInterface';
+import { IResult } from "./models/interfaces/IResult";
 
 export interface SearchState {
     loading: boolean;
     searchResults: IResult[];
     error: string;
-}
+};
 
 const defaultState: SearchState = {
     loading: false,
     searchResults: [],
-    error: '',
+    error: "",
 };
 
 export const searchReducer = (
@@ -25,12 +25,12 @@ export const searchReducer = (
 ): SearchState => {
     switch (action.type) {
         case FETCH_SEARCH_REQUEST:
-            return { loading: true, searchResults: [], error: '' };
+            return { loading: true, searchResults: [], error: "" };
         case FETCH_SEARCH_SUCCESS:
-            return { loading: false, searchResults: action.searchResults, error: '' };
+            return { loading: false, searchResults: action.searchResults, error: "" };
         case FETCH_SEARCH_FAILURE:
             return { loading: false, searchResults: [], error: action.error };
         default:
             return state;
-    }
+    };
 };

@@ -3,9 +3,9 @@ import {
     FETCH_FACTIONS_REQUEST,
     FETCH_FACTIONS_SUCCESS,
     FETCH_FACTIONS_FAILURE,
-} from './models/actions';
+} from "./models/actions";
 
-import { IFaction } from './models/factionsInterface';
+import { IFaction } from "./models/interfaces/IFaction";
 
 export interface FactionState {
     loading: boolean;
@@ -16,7 +16,7 @@ export interface FactionState {
 const defaultState: FactionState = {
     loading: false,
     factions: [],
-    error: '',
+    error: "",
 };
 
 export const factionsReducer = (
@@ -25,12 +25,12 @@ export const factionsReducer = (
 ): FactionState => {
     switch (action.type) {
         case FETCH_FACTIONS_REQUEST:
-            return { loading: true, factions: [], error: '' };
+            return { loading: true, factions: [], error: "" };
         case FETCH_FACTIONS_SUCCESS:
-            return { loading: false, factions: action.factions, error: '' };
+            return { loading: false, factions: action.factions, error: "" };
         case FETCH_FACTIONS_FAILURE:
             return { loading: false, factions: [], error: action.error };
         default:
             return state;
-    }
+    };
 };

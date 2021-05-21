@@ -1,24 +1,24 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from "react";
 
-import { IFaction } from '../store/factions/models/factionsInterface';
-import Modal from '../components/Modal';
-import Corporation from './FactionCorporation';
+import { IFaction } from "../store/factions/models/interfaces/IFaction";
+import Modal from "../components/Modal";
+import Corporation from "./Corporation";
 
 type FactionCardProps = {
     factionElement: IFaction
-}
+};
 
 const FactionCard: React.FC<FactionCardProps> = ({ factionElement }) => {
     const [open, setOpen] = useState<boolean>(false);
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-    const handleCardOpen = () => {
+    const handleCardOpen = useCallback(() => {
         setOpen(!open);
-    }
+    }, [open])
 
-    const handleModalOpen = () => {
+    const handleModalOpen = useCallback(() => {
         setModalOpen(!modalOpen);
-    }
+    }, [modalOpen]);
 
     return (
         <li className="factions-item">
@@ -37,7 +37,7 @@ const FactionCard: React.FC<FactionCardProps> = ({ factionElement }) => {
                 </>
             )}
         </li>
-    )
-}
+    );
+};
 
 export default FactionCard;

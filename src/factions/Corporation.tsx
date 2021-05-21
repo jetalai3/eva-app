@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react'
-import { ICorporation } from '../store/factions/models/factionsInterface';
-import CeoCard from './CeoCard';
-import CorporationCard from './CorporationCard';
+import React, { useCallback, useState } from "react";
+import { ICorporation } from "../store/factions/models/interfaces/ICorporation";
+import CeoCard from "./CeoCard";
+import CorporationCard from "./CorporationCard";
 
 type CorporationProps = {
     onClose: () => void;
@@ -14,7 +14,7 @@ const Corporation: React.FC<CorporationProps> = ({ corporation, onClose }) => {
     const showStateChange = useCallback((event)=> {
         event.stopPropagation();
         setShowState(!showState);
-    }, [showState])
+    }, [showState]);
 
     const content = !showState ? 
         <CorporationCard handleClick={showStateChange} corporation={corporation}/> :
@@ -26,7 +26,7 @@ const Corporation: React.FC<CorporationProps> = ({ corporation, onClose }) => {
             </button>
             {content}
         </div>
-    )
+    );
 };
 
 export default Corporation;
