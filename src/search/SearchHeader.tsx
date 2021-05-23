@@ -4,8 +4,8 @@ import { SEARCH_OPTIONS } from "../common/constants";
 
 type SearchHeaderProps = {
     fetchSearchRequest: () => void;
-    onTextChange: (event: React.ChangeEvent) => void;
-    onSelectedCategoryChange: (event: React.ChangeEvent) => void;
+    onTextChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onSelectedCategoryChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 const SearchHeader: React.FC<SearchHeaderProps> = ({ fetchSearchRequest, onTextChange, onSelectedCategoryChange }) => {

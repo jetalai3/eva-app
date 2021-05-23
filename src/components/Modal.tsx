@@ -7,7 +7,7 @@ type ModalProps = {
 
 const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
     return createPortal(
-        <div className="modal-wrapper clickable" onClick={onClose}>
+        <div className="modal-wrapper" onClick={onClose}>
             {children}
         </div>,
         document.body

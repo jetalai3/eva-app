@@ -1,19 +1,18 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 
 import { AppState } from "../store/rootStore";
 import { AppActions } from "../store/models/actions";
-
-import SearchHeader from "./SearchHeader";
 import { ICategory } from "../store/search/models/interfaces/ICategory";
 import { IResult } from "../store/search/models/interfaces/IResult";
 import { loadCategoryItems } from "../store/search/SearchActions";
 import SearchList from "./SearchList";
+import SearchHeader from "./SearchHeader";
+import useSearch from "../hooks/useSearch";
 
 import "./Search.css";
-import { SEARCH_OPTIONS } from "../common/constants";
 
 interface LinkStateProps {
     searchResults: IResult[];
@@ -38,21 +37,7 @@ const mapDispatchToProps = (
 const Search: React.FC<LinkProps> = (props) => {
     const { searchResults, loadCategoryItems } = props;
 
-    const [selectedCategory, setSelectedCategory] = useState(SEARCH_OPTIONS[0]);
-    const [searchText, setSearchText] = useState("");
-
-    const onSelectedCategoryChange = useCallback((event) => {
-        setSelectedCategory(SEARCH_OPTIONS.find(item => event.target.value === item.value) || SEARCH_OPTIONS[0]);
-    }, [setSelectedCategory]);
-
-    const onSearch = useCallback(() => {
-        loadCategoryItems(selectedCategory, searchText);
-    }, [loadCategoryItems, selectedCategory, searchText]);
-
-    const onTextChange = useCallback((event) => {
-        setSearchText(event.target.value);
-    }, [setSearchText]);
-
+    const { onSelectedCategoryChange, onSearch, onTextChange } = useSearch(loadCategoryItems);
     return (
         <div className="search">
             <SearchHeader fetchSearchRequest={onSearch} onTextChange={onTextChange} onSelectedCategoryChange={onSelectedCategoryChange} />
