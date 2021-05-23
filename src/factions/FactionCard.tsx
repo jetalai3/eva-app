@@ -6,26 +6,26 @@ import Corporation from "../corporation/Corporation";
 import useToggle from "../hooks/useToggle";
 
 type FactionCardProps = {
-    factionElement: IFaction
+    element: IFaction
 };
 
-const FactionCard: React.FC<FactionCardProps> = ({ factionElement }) => {
+const FactionCard: React.FC<FactionCardProps> = ({ element }) => {
     const { toggled: cardToggled, onToggledChange: onCardToggle } = useToggle();
-    const { toggled: modalToggled, onToggledChange: onModalToggled } = useToggle();
+    const { toggled: modalToggled, onToggledChange: onModalToggle } = useToggle();
 
     return (
         <li className="factions-item">
-            <h3 className="link-primary" onClick={onCardToggle}>{factionElement.name}</h3>
+            <h3 className="link-primary" onClick={onCardToggle}>{element.name}</h3>
             {cardToggled && (
                 <>
-                    <p>Home solar system: {factionElement.solar_system_name}</p>
-                    <p>Description: {factionElement.description}</p>
-                    {factionElement.corporation && (
-                        <button className="btn btn-primary" onClick={onModalToggled}>
-                            {factionElement.corporation.name}
+                    <p>Home solar system: {element.solar_system_name}</p>
+                    <p>Description: {element.description}</p>
+                    {element.corporation && (
+                        <button className="btn btn-primary" onClick={onModalToggle}>
+                            {element.corporation.name}
                         </button>)}
-                    {modalToggled && (<Modal onClose={onModalToggled}>
-                        <Corporation onClose={onModalToggled} corporation={factionElement.corporation} />
+                    {modalToggled && (<Modal onClose={onModalToggle}>
+                        <Corporation onClose={onModalToggle} corporation={element.corporation} />
                     </Modal>)}
                 </>
             )}

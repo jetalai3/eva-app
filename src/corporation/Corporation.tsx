@@ -1,8 +1,11 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
+
 import { ICorporation } from "../store/factions/models/interfaces/ICorporation";
-import CeoCard from "./CeoCard";
+import CorporationCeoCard from "./CorporationCeoCard";
 import CorporationCard from "./CorporationCard";
-import './Corporation.css'
+import useToggle from "../hooks/useToggle";
+
+import "./Corporation.css";
 
 type CorporationProps = {
     onClose: () => void;
@@ -10,16 +13,11 @@ type CorporationProps = {
 };
 
 const Corporation: React.FC<CorporationProps> = ({ corporation, onClose }) => {
-    const [showState, setShowState] = useState<boolean>(false);
+    const { toggled: cardToggled, onToggledChange: onCardToggle } = useToggle();
 
-    const showStateChange = useCallback((event) => {
-        event.stopPropagation();
-        setShowState(!showState);
-    }, [showState]);
-
-    const content = !showState ?
-        <CorporationCard handleClick={showStateChange} corporation={corporation} /> :
-        <CeoCard handleClick={showStateChange} ceo={corporation.ceo} />
+    const content = !cardToggled ?
+        <CorporationCard handleClick={onCardToggle} corporation={corporation} /> :
+        <CorporationCeoCard handleClick={onCardToggle} ceo={corporation.ceo} />
     return (
         <div className="content-wrapper" onClick={event => event.stopPropagation()}>
             <button className="btn btn-secondary" onClick={onClose}>

@@ -46,7 +46,7 @@ const FactionsList: React.FC<LinkProps> = (props) => {
             <h1>Factions of EVE Online</h1>
             <ul>
                 {factions.map((faction: IFaction, index: number) => (
-                    <FactionCard factionElement={faction} key={index} />
+                    <FactionCard element={faction} key={index} />
                 ))}
             </ul>
         </div>
