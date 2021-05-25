@@ -1,29 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { connect, useSelector } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
+import { connect, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 
-import { AppState } from '../store/rootStore';
-import { AppActions } from '../store/models/actions';
+import { AppState } from "../store/rootStore";
+import { AppActions } from "../store/models/actions";
 
-import { IFaction } from '../store/factions/models/factionsInterface';
-import { boundRequestFactions } from '../store/factions/FactionsActions';
-import FactionCard from './FactionCard';
+import { IFaction } from "../store/factions/IFaction";
+import { loadFactions } from "../store/factions/FactionsActions";
+import FactionWrapper from "./FactionWrapper";
 
-import './Factions.css';
-
-interface Props { }
+import "./Factions.css";
 
 interface LinkStateProps {
     factions: IFaction[];
-}
+};
 
 interface LinkDispatchProps {
-    boundRequestFactions: () => void;
-}
+    loadFactions: () => void;
+};
 
-type LinkProps = Props & LinkStateProps & LinkDispatchProps;
+type LinkProps = LinkStateProps & LinkDispatchProps;
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
     factions: state.factionsReducer.factions,
@@ -32,27 +30,27 @@ const mapStateToProps = (state: AppState): LinkStateProps => ({
 const mapDispatchToProps = (
     dispatch: ThunkDispatch<AppState, {}, AppActions>
 ) => ({
-    boundRequestFactions: bindActionCreators(boundRequestFactions, dispatch),
+    loadFactions: bindActionCreators(loadFactions, dispatch),
 });
 
 const FactionsList: React.FC<LinkProps> = (props) => {
     const factionsState = useSelector((state: AppState) => state.factionsReducer.factions);
-    const { factions, boundRequestFactions } = props;
+    const { factions, loadFactions } = props;
 
     useEffect(() => {
-        if (!factionsState.length) boundRequestFactions();
-    }, [boundRequestFactions, factionsState.length]);
+        if (!factionsState.length) loadFactions();
+    }, [loadFactions, factionsState.length]);
 
     return (
         <div>
             <h1>Factions of EVE Online</h1>
             <ul>
                 {factions.map((faction: IFaction, index: number) => (
-                    <FactionCard factionElement={faction} key={index} />
+                    <FactionWrapper element={faction} key={index} />
                 ))}
             </ul>
         </div>
-    )
-}
+    );
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FactionsList);

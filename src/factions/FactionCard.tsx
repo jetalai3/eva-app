@@ -1,43 +1,33 @@
-import React, { useState } from 'react'
+import React from "react";
 
-import { IFaction } from '../store/factions/models/factionsInterface';
-import Modal from '../components/Modal';
-import Corporation from './FactionCorporation';
+import { IFaction } from "../store/factions/IFaction";
 
 type FactionCardProps = {
-    factionElement: IFaction
-}
+    faction: IFaction;
+    corporationName?: string;
+    systemName?: string;
+    cardToggled: boolean;
+    handleClick: () => void;
+    onModalToggle: () => void;
+};
 
-const FactionCard: React.FC<FactionCardProps> = ({ factionElement }) => {
-    const [open, setOpen] = useState<boolean>(false);
-    const [modalOpen, setModalOpen] = useState<boolean>(false);
-
-    const handleCardOpen = () => {
-        setOpen(!open);
-    }
-
-    const handleModalOpen = () => {
-        setModalOpen(!modalOpen);
-    }
-
+const FactionCard: React.FC<FactionCardProps> = (props) => {
+    const { faction, handleClick, cardToggled, onModalToggle, corporationName, systemName } = props;
     return (
         <li className="factions-item">
-            <p onClick={handleCardOpen}>Faction name: {factionElement.name}</p>
-            {open && (
+            <h3 className="link-primary" onClick={handleClick}>{faction.name}</h3>
+            {cardToggled && (
                 <>
-                    <p>Solar system name: {factionElement.solar_system_name}</p>
-                    <p>Description: {factionElement.description}</p>
-                    {factionElement.corporation.name && (
-                        <button onClick={handleModalOpen}>
-                            {factionElement.corporation.name}
+                    <p>Home solar system: {systemName}</p>
+                    <p>Description: {faction.description}</p>
+                    {corporationName && (
+                        <button className="btn btn-primary" onClick={onModalToggle}>
+                            {corporationName}
                         </button>)}
-                    {modalOpen && (<Modal onClose={handleModalOpen}>
-                        <Corporation onClose={handleModalOpen} corporation={factionElement.corporation} />
-                    </Modal>)}
                 </>
             )}
         </li>
-    )
-}
+    );
+};
 
 export default FactionCard;

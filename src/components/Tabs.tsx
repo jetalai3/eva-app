@@ -1,12 +1,12 @@
-import React, { useState } from "react"
-import TabHeader from "./TabHeader"
+import React, { useState } from "react";
+import TabHeader from "./TabHeader";
 
 type TabsProps = {
     items: Array<{ title: string, content: React.FC }>
-}
+};
 
 const Tabs: React.FC<TabsProps> = ({ items }) => {
-    const [selectedTab, setSelectedTab] = useState<number>(0)
+    const [selectedTab, setSelectedTab] = useState<number>(0);
     const TabComponent = items[selectedTab].content;
     return (
         <>
@@ -20,7 +20,7 @@ const Tabs: React.FC<TabsProps> = ({ items }) => {
             ))}
             <TabComponent />
         </>
-    )
-}
+    );
+};
 
 export default Tabs;

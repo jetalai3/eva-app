@@ -1,4 +1,4 @@
-import { IFaction } from './factionsInterface';
+import { IFaction } from "./IFaction";
 
 export const FETCH_FACTIONS_REQUEST = "FETCH_FACTIONS_REQUEST";
 export const FETCH_FACTIONS_SUCCESS = "FETCH_FACTIONS_SUCCESS";
