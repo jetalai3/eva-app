@@ -3,9 +3,9 @@ import {
     FETCH_FACTIONS_REQUEST,
     FETCH_FACTIONS_SUCCESS,
     FETCH_FACTIONS_FAILURE,
-} from "./models/actions";
+} from "./actions";
 
-import { IFaction } from "./models/interfaces/IFaction";
+import { IFaction } from "./IFaction";
 
 export interface FactionState {
     loading: boolean;

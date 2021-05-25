@@ -1,21 +1,28 @@
 import React from "react";
-import { ICorporation } from "../store/factions/models/interfaces/ICorporation";
+import { ICeo } from "../store/ceos/ICeo";
+import { ICorporation } from "../store/corporations/ICorporation";
 
 type CorporationCardProps = {
     corporation: Partial<ICorporation>;
-    handleClick: (event: React.MouseEvent) => void;
+    ceo?: ICeo;
+    handleClick: () => void;
+    onClose: () => void;
 };
 
-const CorporationCard: React.FC<CorporationCardProps> = ({ corporation, handleClick }) => {
-    const haveCeo = corporation.ceo && Object.keys(corporation.ceo).length !== 0;
+const CorporationCard: React.FC<CorporationCardProps> = (props) => {
+    const { corporation, ceo, handleClick, onClose } = props;
+
     return (
         <div>
+            <button className="btn btn-secondary" onClick={onClose}>
+                Close
+            </button>
             <h3 className="corporation-header">{corporation.name}</h3>
             <p className="corporation-member_count">Member count: {corporation.member_count}</p>
             <p>{corporation.description}</p>
-            {haveCeo && (
+            {ceo && (
                 <button className="btn btn-secondary" onClick={handleClick}>
-                    CEO: {corporation.ceo?.name}
+                    CEO: {ceo.name}
                 </button>
             )}
         </div>

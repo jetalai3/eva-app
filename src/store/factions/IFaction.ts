@@ -1,4 +1,4 @@
-import { ICorporation } from "./ICorporation";
+import { ICorporation } from "../corporations/ICorporation";
 
 export interface IFaction {
     corporation_id: number;

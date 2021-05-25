@@ -1,5 +1,5 @@
 import { loadFactions } from "./FactionsActions";
-import { FETCH_FACTIONS_FAILURE, FETCH_FACTIONS_REQUEST, FETCH_FACTIONS_SUCCESS } from "./models/actions";
+import { FETCH_FACTIONS_FAILURE, FETCH_FACTIONS_REQUEST, FETCH_FACTIONS_SUCCESS } from "./actions";
 
 const CORPORATION_ID = 1000084;
 const FACTION_ID = 500003;

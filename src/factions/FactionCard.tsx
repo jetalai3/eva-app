@@ -1,32 +1,29 @@
 import React from "react";
 
-import { IFaction } from "../store/factions/models/interfaces/IFaction";
-import Modal from "../components/Modal";
-import Corporation from "../corporation/Corporation";
-import useToggle from "../hooks/useToggle";
+import { IFaction } from "../store/factions/IFaction";
 
 type FactionCardProps = {
-    element: IFaction
+    faction: IFaction;
+    corporationName?: string;
+    systemName?: string;
+    cardToggled: boolean;
+    handleClick: () => void;
+    onModalToggle: () => void;
 };
 
-const FactionCard: React.FC<FactionCardProps> = ({ element }) => {
-    const { toggled: cardToggled, onToggledChange: onCardToggle } = useToggle();
-    const { toggled: modalToggled, onToggledChange: onModalToggle } = useToggle();
-
+const FactionCard: React.FC<FactionCardProps> = (props) => {
+    const { faction, handleClick, cardToggled, onModalToggle, corporationName, systemName } = props;
     return (
         <li className="factions-item">
-            <h3 className="link-primary" onClick={onCardToggle}>{element.name}</h3>
+            <h3 className="link-primary" onClick={handleClick}>{faction.name}</h3>
             {cardToggled && (
                 <>
-                    <p>Home solar system: {element.solar_system_name}</p>
-                    <p>Description: {element.description}</p>
-                    {element.corporation && (
+                    <p>Home solar system: {systemName}</p>
+                    <p>Description: {faction.description}</p>
+                    {corporationName && (
                         <button className="btn btn-primary" onClick={onModalToggle}>
-                            {element.corporation.name}
+                            {corporationName}
                         </button>)}
-                    {modalToggled && (<Modal onClose={onModalToggle}>
-                        <Corporation onClose={onModalToggle} corporation={element.corporation} />
-                    </Modal>)}
                 </>
             )}
         </li>

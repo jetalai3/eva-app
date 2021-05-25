@@ -7,9 +7,9 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../store/rootStore";
 import { AppActions } from "../store/models/actions";
 
-import { IFaction } from "../store/factions/models/interfaces/IFaction";
+import { IFaction } from "../store/factions/IFaction";
 import { loadFactions } from "../store/factions/FactionsActions";
-import FactionCard from "./FactionCard";
+import FactionWrapper from "./FactionWrapper";
 
 import "./Factions.css";
 
@@ -46,7 +46,7 @@ const FactionsList: React.FC<LinkProps> = (props) => {
             <h1>Factions of EVE Online</h1>
             <ul>
                 {factions.map((faction: IFaction, index: number) => (
-                    <FactionCard element={faction} key={index} />
+                    <FactionWrapper element={faction} key={index} />
                 ))}
             </ul>
         </div>

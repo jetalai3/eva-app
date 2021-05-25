@@ -1,4 +1,4 @@
 export interface IRace {
-    id: number;
+    race_id: number;
     name: string;
 };

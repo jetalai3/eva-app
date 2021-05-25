@@ -1,4 +1,4 @@
-import { IRace } from "./IRace";
+import { IRace } from "../races/IRace";
 
 export interface ICeo {
     id: number;

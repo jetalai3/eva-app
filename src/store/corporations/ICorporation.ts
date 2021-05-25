@@ -1,4 +1,4 @@
-import { ICeo } from "./ICeo";
+import { ICeo } from "../ceos/ICeo";
 
 export interface ICorporation {
     id: number;
